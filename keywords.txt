@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map MServo
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MServo	KEYWORD1	MServo
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+attach	KEYWORD2
+setAngleConstrain	KEYWORD2
+setPotConstrain	KEYWORD2
+write	KEYWORD2
+update	KEYWORD2
+getAngle	KEYWORD2
+getTarget	KEYWORD2
+setTolerance	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
