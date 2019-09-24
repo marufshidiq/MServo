@@ -2,14 +2,30 @@
 #include "MServo.h"
 
 // Constructor
-MServo::MServo() {}
-
-void MServo::attach(int pot, int dir, int pwm) {
+MServo::MServo(int pot, int dirA, int pwm) {
+  _driverType = 1;
   _pot = pot;
-  _dir = dir;
+  _dirA = dirA;
   _pwm = pwm;
   pinMode(_pot, INPUT);
-  pinMode(_dir, OUTPUT);
+  pinMode(_dirA, OUTPUT);
+  pinMode(_pwm, OUTPUT);
+
+  // Change all value to 0
+  for (int thisReading = 0; thisReading < _numRead; thisReading++) {
+    _readings[thisReading] = 0;
+  }
+}
+
+MServo::MServo(int pot, int dirA, int dirB, int pwm) {
+  _driverType = 2;
+  _pot = pot;
+  _dirA = dirA;
+  _dirB = dirB;
+  _pwm = pwm;
+  pinMode(_pot, INPUT);
+  pinMode(_dirA, OUTPUT);
+  pinMode(_dirB, OUTPUT);
   pinMode(_pwm, OUTPUT);
 
   // Change all value to 0
@@ -39,11 +55,32 @@ void MServo::move(int val) {
   if(reverse){
     val *=-1;
   }
+  if(_driverType == 1){
+    moveTypeOne(val);
+  }
+  else if(_driverType == 2){
+    moveTypeTwo(val);
+  }
+}
+
+void MServo::moveTypeOne(int val){
   if (val >= 0) {
-    digitalWrite(_dir, 0);
+    digitalWrite(_dirA, 0);
     analogWrite(_pwm, val);
   } else if (val < 0) {
-    digitalWrite(_dir, 1);
+    digitalWrite(_dirA, 1);
+    analogWrite(_pwm, 255 + val);
+  }
+}
+
+void MServo::moveTypeTwo(int val){
+  if (val >= 0) {
+    digitalWrite(_dirA, 0);
+    digitalWrite(_dirB, 1);
+    analogWrite(_pwm, val);
+  } else if (val < 0) {
+    digitalWrite(_dirA, 1);
+    digitalWrite(_dirB, 0);
     analogWrite(_pwm, 255 + val);
   }
 }

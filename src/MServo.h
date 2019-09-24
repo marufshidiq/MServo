@@ -5,8 +5,8 @@
 
 class MServo {
   public:
-    MServo();
-    void attach(int pot, int dir, int pwm);
+    MServo::MServo(int pot, int dirA, int pwm);
+    MServo::MServo(int pot, int dirA, int dirB, int pwm);
     int getPot();
     int movingAverage();
     void move(int val);
@@ -20,7 +20,8 @@ class MServo {
     void update();
     bool reverse = false;
   private:
-    int _pot, _dir, _pwm;
+    int _pot, _dirA, _dirB, _pwm;
+    int _driverType = 1; // Number of pin for control the motor driver
 
     // Moving Average
     int _numRead = 10; // Default 10
