@@ -10,6 +10,8 @@ class MServo {
     int getPot();
     int movingAverage();
     void move(int val);
+    void moveTypeOne(int val);
+    void moveTypeTwo(int val);
     int getAngle();
     int getTarget();
     void resetTarget();
