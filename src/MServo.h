@@ -5,8 +5,8 @@
 
 class MServo {
   public:
-    MServo::MServo(int pot, int dirA, int pwm);
-    MServo::MServo(int pot, int dirA, int dirB, int pwm);
+    MServo(int pot, int dirA, int pwm);
+    MServo(int pot, int dirA, int dirB, int pwm);
     int getPot();
     int movingAverage();
     void move(int val);
